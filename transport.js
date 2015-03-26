@@ -442,6 +442,12 @@ module.exports = function transport( options ) {
           'Content-Length': buffer.Buffer.byteLength(outjson),
         }
         
+        if (args.headers) {
+          for (var header in args.headers) {
+            headers[header] = args.headers[header];
+          }
+        }
+
         headers['seneca-id']     = out ? out.id : seneca.id
         headers['seneca-kind']   = 'res'
         headers['seneca-origin'] = out ? out.origin : 'UNKNOWN'
